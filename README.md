@@ -7,6 +7,7 @@
 ### General Info
 1. [Hito 1](https://github.com/karen242001/Base-de-datos-I-/tree/main/Hito1)
 2. [Hito 2](https://github.com/karen242001/Base-de-datos-I-/blob/main/Hito2)
+<ul_>
 -Evaluación Procesual.
 -Laboratorios
 3. [Hito 3](#h3)
