@@ -8,17 +8,18 @@
 1. [Hito 1](https://github.com/karen242001/Base-de-datos-I-/tree/main/Hito1)
 2. [Hito 2](https://github.com/karen242001/Base-de-datos-I-/blob/main/Hito2)
 
-	2. [Evaluación Procesual]()
-	2. [Laboratorios]()
+	- [Evaluación Procesual]()
+	- [Laboratorios]()
+
 3. [Hito 3](#h3)
 
-	3. [Evaluación Procesual]()
-	3. [Laboratorios]()
+	- [Evaluación Procesual]()
+	- [Laboratorios]()
 
-		3. [Laboratorios_1]()
-		3. [Laboratorios_2]()
-		3. [Laboratorios_3]()
-		3. [Laboratorios_4]()
+		- [Laboratorios_1]()
+		- [Laboratorios_2]()
+		- [Laboratorios_3]()
+		- [Laboratorios_4]()
 4. [Hito 4](#h4)
 5. [Hito 5](#h5)
 
