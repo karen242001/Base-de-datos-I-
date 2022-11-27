@@ -59,6 +59,237 @@ insert into JUGADOR(id_jugador,nombres,apellidos,ci,edad,id_equipo)
 values ('jug-444','Sandra','Solis','8997844LP', 20,'equ-333');
 insert into JUGADOR(id_jugador,nombres,apellidos,ci,edad,id_equipo)
 values ('jug-555','Ana','Mica','8997855LP', 23,'equ-333');
+---------------------------------------------------------------------------
+----------------------------------------------------------------------------
+--MANEJO DE CONSULTAS
+--3.1. Mostrar que jugadores que formen parte del equipo equ-333
+
+SELECT *
+FROM EQUIPO as e
+	inner join JUGADOR as j on j.id_equipo=e.id_equipo
+WHERE e.id_equipo='equ-333'
+
+--3.2. Crear una función que permita saber cuántos jugadores están inscritos.
+------ La función debe llamarse Crear una función que permita saber cuántos jugadores están inscritos.
+------ La función debe llamarse F1_CantidadJugadores()()
+
+select COUNT (*) AS Cantidad_de_Jugadores
+from JUGADOR;
+
+
+CREATE FUNCTION F1_CantidadJugadores()
+	RETURNS INTEGER AS
+		BEGIN 
+			DECLARE @c INTEGER=0;
+			select @c = COUNT (*)
+			from JUGADOR;
+		
+			RETURN @c;
+		END;
+
+SELECT dbo.F1_CantidadJugadores() AS CANTIDAD_DE_JUGADORES
+
+DROP FUNCTION F1_CantidadJugadores
+
+--3.3. Crear una función que permita saber cuántos jugadores están inscritos y que sean de la categoría varones o mujeres.
+------La función debe llamarse F2_CantidadJugadoresParam()
+------La función debe recibir un parámetro “Varones” o “Mujeres”
+
+SELECT COUNT (*) as CATEGORIA_MUJERES
+FROM EQUIPO AS e
+	inner join JUGADOR AS j ON j.id_equipo=e.id_equipo
+WHERE e.categoria = 'MUJERES' 
+
+SELECT COUNT (*) as CATEGORIA_VARONES 
+FROM EQUIPO AS e
+	inner join JUGADOR AS j ON j.id_equipo=e.id_equipo
+WHERE e.categoria = 'VARONES'
+
+
+CREATE FUNCTION F2_CantidadJugadoresParam()
+	RETURNS INTEGER AS
+		BEGIN 
+			DECLARE @categoriaMujer INTEGER=0;
+
+			SELECT @categoriaMujer  = COUNT (*) 
+			FROM EQUIPO AS e
+				inner join JUGADOR AS j ON j.id_equipo=e.id_equipo
+			WHERE e.categoria = 'MUJERES' 
+			
+			RETURN @categoriaMujer;
+			
+		END;
+
+SELECT dbo.F2_CantidadJugadoresParam() AS CATEGORIA_MUJERES
+
+
+CREATE FUNCTION F2_CantidadJugadoresParam1()
+	RETURNS INTEGER AS
+		BEGIN 
+			
+			DECLARE @categoriaVaron INTEGER=0; 
+
+		
+			SELECT @categoriaVaron = COUNT (*)
+			FROM EQUIPO AS e
+				inner join JUGADOR AS j ON j.id_equipo=e.id_equipo
+			WHERE e.categoria = 'VARONES'
+					
+			RETURN @categoriaVaron;
+		END;
+
+SELECT dbo.F2_CantidadJugadoresParam1() AS CATEGORIA_VARONES
+SELECT dbo.F2_CantidadJugadoresParam() AS CATEGORIA_MUJERES
+
+
+--3.4. Crear una función que obtenga el promedio de las edades mayores a una cierta edad.
+------La función debe llamarse F3_PromedioEdades()
+------La función debe recibir como parámetro 2 valores.
+------La categoría. (Varones o Mujeres)
+------La edad con la que se comparara (21 años ejemplo)
+------Es decir mostrar el promedio de edades que sean de una categoría y que sean mayores a 21 años.
+
+SELECT AVG(j.edad) 
+FROM EQUIPO  AS e
+		inner join JUGADOR AS j ON j.id_equipo=e.id_equipo
+WHERE j.edad>21 and e.categoria ='MUJERES' OR
+		e.categoria ='VARONES'
+
+ALTER FUNCTION F3_PromedioEdades(@VARON INT, @MUJER INT)
+	RETURNS  INTEGER AS
+	BEGIN
+	DECLARE @PROMEDIO INTEGER =0;
+		SELECT @PROMEDIO = AVG(j.edad) 
+		FROM EQUIPO  AS e
+		inner join JUGADOR AS j ON j.id_equipo=e.id_equipo
+		WHERE j.edad>21 and e.categoria ='MUJERES'  OR
+		e.categoria ='VARONES'
+
+		RETURN @PROMEDIO;
+	END; 
+
+SELECT dbo.F3_PromedioEdades(10,20) AS PROMEDIO
+
+
+
+---3.6. Generar la serie fibonacci.
+------El objetivo es generar una función que retorne una cadena con la serie de la fibonacci.
+------La función solo recibe el valor N.
+------Comportamiento esperado
+
+CREATE FUNCTION F4_Fibonacci(@N int)
+	RETURNS @numbers TABLE(NUMBER int)
+	AS
+	BEGIN
+	DECLARE @n1 int = 0,
+			@n2 int =1,
+			@i int=0,
+			@temp int
+		Insert Into @numbers 
+		Values(@n1),(@n2)
+
+	WHILE (@i<=@N-2)
+	BEGIN 
+		Insert Into @numbers 
+		Values(@n2+@n1)
+
+		set @temp = @n2
+		Set @n2 = @n2 + @n1
+		Set @n1 = @temp
+		Set @i += 1
+	END	
+	RETURN 
+	END;
+
+Select * from dbo.F4_Fibonacci(5)
+Select * from dbo.F4_Fibonacci(15)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----------------------------------------------------------------------------------
+--HITO_3
 
 --3. Manejo de consultas
 
